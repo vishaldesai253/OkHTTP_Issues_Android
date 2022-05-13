@@ -4,7 +4,7 @@ package com.example.gitissuespull.api
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitHelper {
+object RetrofitApi {
     private const val BASE_URL = "https://api.github.com/repos/square/okhttp/"
 
     fun getInstance() : Retrofit {

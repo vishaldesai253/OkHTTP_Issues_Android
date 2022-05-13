@@ -123,6 +123,20 @@
                 tools:itemCount="5"
                 android:scrollbars="none"
                 android:layout_marginTop="5dp" />
+            <TextView
+                android:id="@+id/noComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:layout_gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                android:text="No any comments yet!" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

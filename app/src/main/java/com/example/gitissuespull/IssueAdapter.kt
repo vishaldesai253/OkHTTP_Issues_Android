@@ -66,7 +66,7 @@ class IssueAdapter(private val activity: Activity) :
             else
                 description.text = data.body.toString()
             if(data.updatedAt!=null) {
-                var formatDate: String ="update at "
+                var formatDate: String ="update at " +
                     data.updatedAt!!.substring(5, 10) + "-" +data.updatedAt!!.substring(0, 4)
                    updatedAt.text = formatDate
             }

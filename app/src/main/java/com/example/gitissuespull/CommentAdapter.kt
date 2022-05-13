@@ -33,12 +33,7 @@ class CommentAdapter(private val activity: Activity) :
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         holder.bind(commentList?.get(position)!!)
-        holder.itemView.setOnClickListener(View.OnClickListener { v ->
-            val context: Context = v.context
-            val intent = Intent(context, IssueActivity::class.java)
-            intent.putExtra("ISSUE_DATA", commentList!![position])
-            context.startActivity(intent)
-        })
+
     }
 
     override fun getItemCount(): Int {

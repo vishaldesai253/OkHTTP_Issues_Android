@@ -1,15 +1,13 @@
 package com.example.gitissuespull
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.gitissuespull.api.IssueService
-import com.example.gitissuespull.api.RetrofitHelper
+import com.example.gitissuespull.api.RetrofitApi
 
 import com.example.gitissuespull.databinding.ActivityMainBinding
 
@@ -33,23 +31,24 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
     }
-
+    //initialize recyclerview of issues which shows on home page
     private fun initRecycleView() {
         binding.issueRecyclerView.layoutManager = LinearLayoutManager(this)
         recyclerAdapter = IssueAdapter(this)
         binding.issueRecyclerView.adapter = recyclerAdapter
     }
 
+    //set list of issues to adapter through viewmodel
     private fun initViewModel() {
 
-        val issueService = RetrofitHelper.getInstance().create(IssueService::class.java)
+        val issueService = RetrofitApi.getInstance().create(IssueService::class.java)
         val repository = IssueRepository(issueService, applicationContext)
 
         mainViewModel =
             ViewModelProvider(this, MainViewModelFactory(repository))[MainViewModel::class.java]
 
         mainViewModel.issues.observe(this, Observer {
-            Toast.makeText(this@MainActivity, it.size.toString(), Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@MainActivity, it.size.toString(), Toast.LENGTH_SHORT).show()
             recyclerAdapter.setIssueList(it)
             recyclerAdapter.notifyDataSetChanged()
 
