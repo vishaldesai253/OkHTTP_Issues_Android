@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.gitissuespull.api.IssueService
 import com.example.gitissuespull.api.RetrofitApi
+import com.example.gitissuespull.database.IssueRoomDatabase
 
 import com.example.gitissuespull.databinding.ActivityMainBinding
 
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
     private fun initViewModel() {
 
         val issueService = RetrofitApi.getInstance().create(IssueService::class.java)
-        val repository = IssueRepository(issueService, applicationContext)
+        val database=IssueRoomDatabase.getDatabase(applicationContext)
+        val repository = IssueRepository(issueService, database,applicationContext)
 
         mainViewModel =
             ViewModelProvider(this, MainViewModelFactory(repository))[MainViewModel::class.java]

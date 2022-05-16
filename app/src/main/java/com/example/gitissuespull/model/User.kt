@@ -1,12 +1,16 @@
 package com.example.gitissuespull.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-
+@Entity
 data class User (
 
   @SerializedName("login"               ) var login             : String?  = null,
+  @PrimaryKey
   @SerializedName("id"                  ) var id                : Int?     = null,
   @SerializedName("node_id"             ) var nodeId            : String?  = null,
   @SerializedName("avatar_url"          ) var avatarUrl         : String?  = null,

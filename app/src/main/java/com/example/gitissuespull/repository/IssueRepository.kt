@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.gitissuespull.api.IssueService
+import com.example.gitissuespull.database.IssueRoomDatabase
 import com.example.gitissuespull.model.Issue
 import com.example.gitissuespull.utils.NetworkUtils
 
 class IssueRepository(
     private val issueService: IssueService,
+    private val issueDatabase: IssueRoomDatabase,
     private val applicationContext: Context
 ) {
 
@@ -21,13 +23,14 @@ class IssueRepository(
 
         if(NetworkUtils.isInternetAvailable(applicationContext)){
             val result = issueService.getIssues()
-            if(result?.body() != null){
+            if(result.body() != null){
                 issuesLiveData.postValue(result.body())
+                issueDatabase.issueDao().insertIssues(result.body()!!)
             }
         }
         else {
-            //load data from local
-
+            val issues=issueDatabase.issueDao().getIssues()
+            issuesLiveData.postValue(issues)
         }
     }
 }
